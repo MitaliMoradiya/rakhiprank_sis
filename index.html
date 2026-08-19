@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Storage — Cleanup</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;1,500&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="stage" class="stage phase-system">
+
+  <!-- SOUND TOGGLE -->
+  <button id="soundToggle" class="sound-toggle" aria-label="Toggle sound" type="button">
+    <span class="sound-icon">🔇</span>
+  </button>
+
+  <!-- ============ SCENE 1 — FAKE MEMORY CLEANUP ============ -->
+  <section class="scene active dark" id="scene-1" data-scene="1">
+    <div class="phone-frame">
+      <div class="status-row">
+        <span class="status-label">Storage</span>
+        <span class="status-clock" id="fakeClock">9:41</span>
+      </div>
+
+      <div class="cleanup-core">
+        <div class="ring-wrap">
+          <svg class="ring" viewBox="0 0 120 120">
+            <circle class="ring-track" cx="60" cy="60" r="52"></circle>
+            <circle class="ring-fill" id="ringFill" cx="60" cy="60" r="52"></circle>
+          </svg>
+          <div class="ring-center">
+            <span class="ring-percent" id="ringPercent">0%</span>
+          </div>
+        </div>
+
+        <h1 class="cleanup-title">SYSTEM CLEANUP</h1>
+        <p class="cleanup-sub">Memory cleanup<br>in progress</p>
+        <p class="cleanup-warn">Please don't close this window.</p>
+      </div>
+
+      <div class="activity-list mono" id="activityList" aria-live="polite"></div>
+
+      <p class="status-line mono" id="statusLine">Scanning storage&hellip;</p>
+    </div>
+  </section>
+
+  <!-- ============ SCENE 2 — DELETION RESULT ============ -->
+  <section class="scene dark" id="scene-2" data-scene="2">
+    <div class="phone-frame">
+      <p class="warn-tag mono" id="tag2">⚠ STORAGE CLEANUP</p>
+      <h1 class="result-title" id="resultTitle">Memory cleanup completed.</h1>
+
+      <div class="result-count" id="resultCount">
+        <span class="result-number">4,826</span>
+        <span class="result-label">items processed</span>
+      </div>
+
+      <ul class="result-list mono" id="resultList">
+        <li><span>📸 Photos</span><b class="deleted-tag">deleted</b></li>
+        <li><span>🎥 Videos</span><b class="deleted-tag">deleted</b></li>
+        <li><span>🎞️ Screenshots</span><b class="deleted-tag">deleted</b></li>
+        <li><span>📁 Files</span><b class="deleted-tag">deleted</b></li>
+        <li><span>💬 Saved memories</span><b class="deleted-tag">deleted</b></li>
+      </ul>
+
+      <div class="wait-block hidden" id="waitBlock">
+        <p class="wait-text">Wait&hellip;</p>
+        <p class="stop-question">Do you want to stop this?</p>
+        <div class="btn-row" id="stopButtons">
+          <button class="btn btn-yes" id="btnYes" type="button">YES, STOP IT 😭</button>
+          <button class="btn btn-no" id="btnNo" type="button">NO, LET HIM 😏</button>
+        </div>
+        <p class="dodge-msg" id="dodgeMsg">&nbsp;</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SCENE 4 — BROTHER REVEAL ============ -->
+  <section class="scene" id="scene-4" data-scene="4">
+    <div class="reveal-wrap">
+      <p class="reveal-emoji">😌</p>
+      <h1 class="reveal-title">BROTHER'S REVENGE</h1>
+      <p class="reveal-line" data-in="1">Relax, drama queen.</p>
+      <p class="reveal-line" data-in="2">I didn't delete anything. 😂</p>
+      <p class="reveal-line" data-in="3">But since you're already here&hellip;</p>
+      <p class="reveal-line" data-in="4">Let's settle a few sibling facts.</p>
+      <p class="reveal-line strong" data-in="5">5 QUESTIONS.<br>NO LYING. 😏</p>
+      <button class="btn btn-primary" id="startQuizBtn" type="button">START THE QUESTIONS →</button>
+    </div>
+  </section>
+
+  <!-- ============ SCENE 5 — QUIZ ============ -->
+  <section class="scene" id="scene-5" data-scene="5">
+    <div class="quiz-wrap">
+      <div class="quiz-head">
+        <span class="quiz-count mono" id="quizCount">QUESTION 1 / 5</span>
+        <div class="quiz-progress"><div class="quiz-progress-fill" id="quizProgressFill"></div></div>
+      </div>
+
+      <h2 class="quiz-question" id="quizQuestion">Who is the smarter one between us?</h2>
+
+      <div class="quiz-options" id="quizOptions">
+        <button class="quiz-opt" data-answer="brother" type="button"></button>
+        <button class="quiz-opt" data-answer="sister" type="button"></button>
+      </div>
+
+      <p class="quiz-feedback" id="quizFeedback">&nbsp;</p>
+    </div>
+  </section>
+
+  <!-- ============ SCENE 6 — TRUTH ACCEPTED ============ -->
+  <section class="scene" id="scene-6" data-scene="6">
+    <div class="truth-wrap">
+      <p class="truth-check" id="truthCheck">✓</p>
+      <p class="truth-score" id="truthScore">5 / 5</p>
+      <p class="truth-line" id="truthIntro">Remember all those answers you just gave? 👀</p>
+
+      <div class="truth-list" id="truthList">
+        <p class="truth-item" data-in="1">🧠 I'm the smarter one.</p>
+        <p class="truth-item" data-in="2">🥊 You start the fights.</p>
+        <p class="truth-item" data-in="3">🎭 You're the dramatic one.</p>
+        <p class="truth-item" data-in="4">😂 And somehow&hellip; I still tolerate you.</p>
+      </div>
+
+      <p class="truth-line" data-in="5" id="truthSo">So now that you've finally accepted the truth&hellip;</p>
+      <p class="truth-line" data-in="6" id="truthOk">Okay okay, fine.</p>
+      <p class="truth-line strong" data-in="7" id="truthGiftLine">I have a little gift for you. 🎁</p>
+
+      <button class="btn btn-primary hidden" id="giftBtn" type="button">I HAVE A GIFT FOR YOU 🎁</button>
+    </div>
+  </section>
+
+  <!-- ============ SCENE 7 — FUNNY GIFT ============ -->
+  <section class="scene" id="scene-7" data-scene="7">
+    <div class="gift-wrap">
+      <h2 class="gift-heading">YOUR OFFICIAL RAKHI GIFT</h2>
+      <p class="gift-sub">Certified Trouble Maker 🏆</p>
+
+      <div class="gift-photo-wrap">
+        <div class="sticker s1">😂</div>
+        <div class="sticker s2">🤦🏻‍♂️</div>
+        <div class="sticker s3">👑</div>
+        <div class="sticker s4">😭</div>
+        <div class="sticker s5">💅🏻</div>
+        <img class="gift-photo" id="funnyPhoto" src="sister.png" alt="Funny photo of the sister" onerror="this.onerror=null;this.src='assets/funny-sister-placeholder.svg';">
+      </div>
+
+      <p class="gift-caption">World's most annoying sister.</p>
+      <p class="gift-caption-small">Officially awarded by her brother.</p>
+
+      <button class="btn btn-primary" id="thatsItBtn" type="button" textcolor="blue">OKAY OKAY, THAT'S IT 😭</button>
+    </div>
+  </section>
+
+  <!-- ============ SCENE 8+9 — EMOTIONAL ============ -->
+  <section class="scene warm" id="scene-8" data-scene="8">
+    <div class="emo-particles" id="emoParticles"></div>
+    <div class="emo-wrap">
+      <p class="emo-eyebrow" id="emoEyebrow">OKAY&hellip; JOKES APART ❤️</p>
+
+      <div class="polaroid" id="polaroid">
+        <div class="polaroid-thread" aria-hidden="true">
+          <svg viewBox="0 0 220 40" class="thread-svg">
+            <path d="M0 20 C 40 0, 60 40, 100 18 S 160 -2, 220 20" stroke="#C97B63" stroke-width="3" fill="none" stroke-linecap="round"/>
+            <circle cx="60" cy="19" r="5" fill="#E7B86B"/>
+            <circle cx="150" cy="12" r="4" fill="#C97B63"/>
+          </svg>
+        </div>
+        <img class="polaroid-photo" id="realPhoto" src="Bro-sis.png" alt="Real photo of brother and sister" onerror="this.onerror=null;this.src='assets/brother-sister-placeholder.svg';">
+      </div>
+
+      <div class="emo-message" id="emoMessage">
+        <p data-line>You may annoy me.</p>
+        <p data-line>You may fight with me over the stupidest things.</p>
+        <p data-line>And I'll probably never stop teasing you&hellip;</p>
+        <p data-line>But having you as my sister is something I'd never change.</p>
+        <p data-line>No matter how much we grow up,<br>you'll always be my bestest sister. ❤️</p>
+      </div>
+
+      <p class="emo-sign" id="emoSign1">Love you always.</p>
+      <p class="emo-sign small" id="emoSign2">— Your annoying brother</p>
+
+      <h1 class="emo-final" id="emoFinal">Happy Raksha Bandhan, Sis! ❤️</h1>
+      <p class="emo-final-sub" id="emoFinalSub">🌸 Happy Rakhi 🌸</p>
+
+      <button class="btn btn-ghost" id="replayBtn" type="button">Replay the prank 😂</button>
+    </div>
+  </section>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
