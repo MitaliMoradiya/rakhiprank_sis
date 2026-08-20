@@ -700,7 +700,7 @@ img{max-width:100%; display:block;}
 .polaroid-photo{
   width:100%;
   aspect-ratio:4/5;
-  object-fit:cover;
+  object-fit:contain;
   border-radius:2px;
   animation:slowZoom 9s ease-in-out infinite alternate;
 }
@@ -745,7 +745,7 @@ img{max-width:100%; display:block;}
   font-size:clamp(24px, 7vw, 32px);
   font-weight:600;
   color:var(--rose-deep);
-  margin-top:20px;
+  margin-top:200px;
   opacity:0;
 }
 .emo-final-sub{
